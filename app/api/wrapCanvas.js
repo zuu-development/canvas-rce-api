@@ -27,14 +27,19 @@ function canvasApiCall(wrapper, request, response, options) {
   const canvasResponseHandler =
     wrapper.canvasResponseHandler || defaultCanvasResponseHandler;
   const transformBody = wrapper.transformBody || defaultTransformBody;
-  let url = sign.verify(request.query.bookmark);
-  if (!url) {
-    request.query.per_page =
+  // let url = sign.verify(request.query.bookmark);
+  request.query.per_page =
       request.query.per_page || DEFAULT_CANVAS_PER_PAGE_ARG;
-    let domain = request.auth.payload.domain;
-    let path = wrapper.canvasPath(request);
-    url = buildUrl(domain, path);
-  }
+  let domain = "canvas-lms-web-1";
+  let path = wrapper.canvasPath(request);
+  let url = buildUrl(domain, path);
+  // if (!url) {
+    // request.query.per_page =
+    //   request.query.per_page || DEFAULT_CANVAS_PER_PAGE_ARG;
+  //   let domain = request.auth.payload.domain;
+  //   let path = wrapper.canvasPath(request);
+  //   url = buildUrl(domain, path);
+  // }
   if (options.method == "GET") {
     canvasProxy.fetch(url, request, wrappedTokenString).then(canvasResponse => {
       canvasResponseHandler(request, response, canvasResponse);
