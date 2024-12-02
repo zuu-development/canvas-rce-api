@@ -30,7 +30,7 @@ function canvasApiCall(wrapper, request, response, options) {
   // let url = sign.verify(request.query.bookmark);
   request.query.per_page =
       request.query.per_page || DEFAULT_CANVAS_PER_PAGE_ARG;
-  let domain = "canvas-lms-web-1";
+  let domain = "stg-canvas.zuudev.com:3000";
   let path = wrapper.canvasPath(request);
   let url = buildUrl(domain, path);
   // if (!url) {
